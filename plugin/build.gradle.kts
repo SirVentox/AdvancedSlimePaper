@@ -38,6 +38,7 @@ tasks {
         relocate("com.mongodb", "com.grinderwolf.swm.internal.mongodb")
         relocate("io.lettuce", "com.grinderwolf.swm.internal.lettuce")
         relocate("org.bson", "com.grinderwolf.swm.internal.bson")
+        relocate("org.apache", "com.grinderwolf.swm.internal.apache")
     }
 
     assemble {

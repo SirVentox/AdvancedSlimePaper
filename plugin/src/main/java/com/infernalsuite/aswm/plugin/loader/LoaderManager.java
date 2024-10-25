@@ -1,5 +1,6 @@
 package com.infernalsuite.aswm.plugin.loader;
 
+import com.infernalsuite.aswm.loaders.cassandra.CassandraLoader;
 import com.infernalsuite.aswm.plugin.config.ConfigManager;
 import com.infernalsuite.aswm.plugin.config.DatasourcesConfig;
 import com.infernalsuite.aswm.api.loaders.SlimeLoader;
@@ -68,8 +69,18 @@ public class LoaderManager {
             }
         }
 
+        DatasourcesConfig.CassandraDbConfig cassandraDbConfig = config.getCassandraDbConfig();
+        if (cassandraDbConfig.isEnabled()) {
+            try {
+                registerLoader("cassandra", new CassandraLoader());
+            } catch (final Exception ex) {
+                LOGGER.error("Unable to establish connection to Cassandra server: ", ex);
+            }
+        }
+
+
         DatasourcesConfig.RedisConfig redisConfig = config.getRedisConfig();
-        if (redisConfig.isEnabled()){
+        if (redisConfig.isEnabled()) {
             try {
                 registerLoader("redis", new RedisLoader(redisConfig.getUri()));
             } catch (final RedisException ex) {
@@ -78,7 +89,7 @@ public class LoaderManager {
         }
 
         DatasourcesConfig.APIConfig apiConfig = config.getApiConfig();
-        if(apiConfig.isEnabled()){
+        if (apiConfig.isEnabled()) {
             registerLoader("api", new APILoader(
                     apiConfig.getUrl(),
                     apiConfig.getUsername(),

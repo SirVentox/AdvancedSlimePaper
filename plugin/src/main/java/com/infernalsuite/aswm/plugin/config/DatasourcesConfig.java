@@ -14,6 +14,8 @@ public class DatasourcesConfig {
     private MongoDBConfig mongoDbConfig = new MongoDBConfig();
     @Setting("redis")
     private RedisConfig redisConfig = new RedisConfig();
+    @Setting("cassandra")
+    CassandraDbConfig cassandraDbConfig = new CassandraDbConfig();
 
     @Setting("api")
     private APIConfig apiConfig = new APIConfig();
@@ -209,6 +211,18 @@ public class DatasourcesConfig {
     }
 
     @ConfigSerializable
+    public static class CassandraDbConfig {
+
+        @Setting("enabled")
+        private boolean enabled = false;
+
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+    }
+
+    @ConfigSerializable
     public static class FileConfig {
 
         @Setting("path")
@@ -310,5 +324,13 @@ public class DatasourcesConfig {
 
     public void setApiConfig(APIConfig apiConfig) {
         this.apiConfig = apiConfig;
+    }
+
+    public CassandraDbConfig getCassandraDbConfig() {
+        return cassandraDbConfig;
+    }
+
+    public void setCassandraDbConfig(CassandraDbConfig cassandraDbConfig) {
+        this.cassandraDbConfig = cassandraDbConfig;
     }
 }

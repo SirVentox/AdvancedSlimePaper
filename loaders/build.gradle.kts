@@ -14,10 +14,10 @@ repositories {
 
 dependencies {
     compileOnly(project(":api"))
-
     api("com.zaxxer:HikariCP:5.1.0")
     api("org.mongodb:mongodb-driver-sync:5.1.0")
     api("io.lettuce:lettuce-core:6.3.2.RELEASE")
+    api("org.apache.cassandra:java-driver-core:4.18.1")
 
     compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     compileOnly("commons-io:commons-io:2.11.0")
